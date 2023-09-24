@@ -35,8 +35,10 @@ target_sources(
     ProjectGL
     PRIVATE
        "${SOURCE_PATH}/main.cpp"
+       "${SOURCE_PATH}/window/win_app.cpp"
     PUBLIC
         "${INCLUDE_PATH}/config.h"
+        "${INCLUDE_PATH}/win_app.h"
 )
 
 # Assuming this is meant to be a public directory
