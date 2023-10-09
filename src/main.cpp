@@ -119,7 +119,13 @@ int main()
         std::cout << "Failed to load texture" << std::endl;
     }
     stbi_image_free(data);
-
+    
+    renderer.use();
+    // either set it manually like so:
+    glUniform1i(glGetUniformLocation(renderer.m_ID, "texture1"), 0);
+    // or set it via the texture class
+    glUniform1i(glGetUniformLocation(renderer.m_ID, "texture2"), 1);
+    //ourShader.setInt("texture2", 1);
     // render loop
     // -----------
     while (!glfwWindowShouldClose(win_app.getWindow()))
@@ -151,7 +157,11 @@ int main()
         glfwSwapBuffers(win_app.getWindow());
         glfwPollEvents();
     }
-
+    // optional: de-allocate all resources once they've outlived their purpose:
+    // ------------------------------------------------------------------------
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------
     glfwTerminate();
