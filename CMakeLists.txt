@@ -27,7 +27,7 @@ find_package(OpenGL REQUIRED)
 add_subdirectory(lib/glfw/ EXCLUDE_FROM_ALL)
 add_subdirectory(lib/Glad/)
 add_subdirectory(lib/stb_image/)
-
+add_subdirectory(lib/glm/)
 
 add_executable(ProjectGL)
 
@@ -52,5 +52,6 @@ target_link_libraries(
                         glfw
                         glad
                         stb_image
+                        glm
 )
 
