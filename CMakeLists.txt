@@ -26,7 +26,7 @@ find_package(OpenGL REQUIRED)
 #add_subdirectory(../lib/Glad/ build)
 add_subdirectory(lib/glfw/ EXCLUDE_FROM_ALL)
 add_subdirectory(lib/Glad/)
-
+add_subdirectory(lib/stb_image/)
 
 
 add_executable(ProjectGL)
@@ -36,9 +36,11 @@ target_sources(
     PRIVATE
        "${SOURCE_PATH}/main.cpp"
        "${SOURCE_PATH}/window/win_app.cpp"
+       "${SOURCE_PATH}/render/render.cpp"
     PUBLIC
         "${INCLUDE_PATH}/config.h"
         "${INCLUDE_PATH}/win_app.h"
+        "${INCLUDE_PATH}/render.h"
 )
 
 # Assuming this is meant to be a public directory
@@ -49,5 +51,6 @@ target_link_libraries(
                     PRIVATE
                         glfw
                         glad
+                        stb_image
 )
 
