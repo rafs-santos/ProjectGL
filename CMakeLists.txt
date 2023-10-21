@@ -18,8 +18,7 @@ endif(CMAKE_COMPILER_IS_GNUCXX)
 
 
 set( SOURCE_PATH "${PROJECT_SOURCE_DIR}/src" )
-set( INCLUDE_PATH "${PROJECT_SOURCE_DIR}/include" )
-
+set( INCLUDE_PATH "${PROJECT_SOURCE_DIR}/src" )
 
 find_package(OpenGL REQUIRED)
 
@@ -36,11 +35,10 @@ target_sources(
     PRIVATE
        "${SOURCE_PATH}/main.cpp"
        "${SOURCE_PATH}/window/win_app.cpp"
-       "${SOURCE_PATH}/render/render.cpp"
+       "${SOURCE_PATH}/renderer/renderer.cpp"
     PUBLIC
-        "${INCLUDE_PATH}/config.h"
-        "${INCLUDE_PATH}/win_app.h"
-        "${INCLUDE_PATH}/render.h"
+        "${INCLUDE_PATH}/window/win_app.h"
+        "${INCLUDE_PATH}/renderer/renderer.h"
 )
 
 # Assuming this is meant to be a public directory

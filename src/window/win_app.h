@@ -5,6 +5,7 @@
 #include <cstdint>
 #include <GLFW/glfw3.h>
 
+
 class WinApp
 {
 public:
@@ -12,16 +13,18 @@ public:
     ~WinApp();
     
     bool init();
-
+    bool initGlad();
     GLFWwindow* getWindow();
+    void shutdown();
+  
 
 private:
     /* data */
-    uint16_t width_;
-    uint16_t height_;
-    std::string title_;
+    uint16_t m_width;
+    uint16_t m_height;
+    std::string m_title;
 
-    GLFWwindow* window_{nullptr};
+    GLFWwindow* m_window{nullptr};
 };
 
 
