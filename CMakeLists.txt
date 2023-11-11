@@ -36,9 +36,11 @@ target_sources(
        "${SOURCE_PATH}/main.cpp"
        "${SOURCE_PATH}/window/win_app.cpp"
        "${SOURCE_PATH}/renderer/renderer.cpp"
+       "${SOURCE_PATH}/game/game.cpp"
     PUBLIC
         "${INCLUDE_PATH}/window/win_app.h"
         "${INCLUDE_PATH}/renderer/renderer.h"
+        "${INCLUDE_PATH}/game/game.h"
 )
 
 # Assuming this is meant to be a public directory

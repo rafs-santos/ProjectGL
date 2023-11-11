@@ -3,6 +3,7 @@
 
 #include <string>
 #include <cstdint>
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 
@@ -15,6 +16,7 @@ public:
     bool init();
     bool initGlad();
     GLFWwindow* getWindow();
+    void processInput();
     void shutdown();
   
 

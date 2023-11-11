@@ -1,11 +1,10 @@
 #include <iostream>
-#include <glad/glad.h>
+
 #include "win_app.h"
 
 WinApp::WinApp(uint16_t width, uint16_t height, const std::string& title) :
     m_width{width}, m_height{height}, m_title{title}
 {
-
 }
 
 WinApp::~WinApp()
@@ -66,6 +65,14 @@ bool WinApp::initGlad(){
     std::cout << "GLAD init successful!\n";
     return true;
   }
+
+// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
+// ---------------------------------------------------------------------------------------------------------
+void WinApp::processInput()
+{
+    if(glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(m_window, true);
+}
 
 void WinApp::shutdown(){
     glfwDestroyWindow(m_window);
