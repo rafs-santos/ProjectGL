@@ -1,6 +1,13 @@
 #include <iostream>
 
 #include "win_app.h"
+#include "game/game.h"
+
+std::map<int, bool> keys {
+        {GLFW_KEY_SPACE , false},
+        {GLFW_KEY_W     , false},
+        {GLFW_KEY_A     , false}
+    };
 
 WinApp::WinApp(uint16_t width, uint16_t height, const std::string& title) :
     m_width{width}, m_height{height}, m_title{title}
@@ -9,6 +16,13 @@ WinApp::WinApp(uint16_t width, uint16_t height, const std::string& title) :
 
 WinApp::~WinApp()
 {
+}
+
+void WinApp::keyCallBack(GLFWwindow* window, int  key, int scancode, int action, int mods){
+    std::map<int,bool>::iterator it = keys.find(key);
+    if (it != keys.end()) {
+        keys[key] = action == GLFW_PRESS;
+    }
 }
 
 bool WinApp::init(){
@@ -32,13 +46,18 @@ bool WinApp::init(){
         return false;
     }    
     glfwMakeContextCurrent(m_window);
+    
+    glfwSetInputMode(m_window, GLFW_STICKY_KEYS, GLFW_TRUE);
+    
     // ************************************************************************************
     // Init callbacks to process inputs
     // ************************************************************************************
-    glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
-        std::cout << "GLFW Key Callback!\n";
-    }
-    );
+    //glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
+    //    std::cout << "GLFW Key Callback!\n";
+    //    // call my function to handle callback
+    //    Game::keyUpdate();
+    //}
+    //);
 
     glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int mods)
     {
@@ -66,12 +85,28 @@ bool WinApp::initGlad(){
     return true;
   }
 
+bool WinApp::getIsKeyDown(int key) {
+    bool result = false;
+    std::map<int,bool>::iterator it = keys.find(key);
+    if (it != keys.end()) {
+        result = keys[key];
+    }
+    return result;
+}
+void WinApp::setIsKeyDown(int key, bool isDown){
+    std::map<int,bool>::iterator it = keys.find(key);
+    if (it != keys.end()) {
+        keys[key] = isDown;
+    }
+}
+
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
-void WinApp::processInput()
+bool WinApp::processInput()
 {
-    if(glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(m_window, true);
+    if(glfwGetKey(m_window, GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwWindowShouldClose(m_window))
+        return false;
+    return true;
 }
 
 void WinApp::shutdown(){
@@ -82,4 +117,8 @@ void WinApp::shutdown(){
 
 GLFWwindow* WinApp::getWindow(){
     return m_window;
+}
+
+void setKeyCallBack(){
+    
 }

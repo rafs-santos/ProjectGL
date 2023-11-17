@@ -1,6 +1,6 @@
 #include "game.h"
 #include <iostream>
-#include <glad/glad.h>
+
 
 
 Game::Game(/* args */)
@@ -12,6 +12,8 @@ Game::~Game()
 }
 
 void Game::start(){
+    // Maybe create my callback before call this
+    
     m_window = new WinApp(1600, 900, "Rafael");
 
     if(!m_window->init()){
@@ -21,7 +23,8 @@ void Game::start(){
     {
         std::cout << "GLAD init failed!";
     }
-
+    glfwSetKeyCallback(m_window->getWindow(), keyCallBack);
+    glfwSetWindowUserPointer(m_window->getWindow(), this);
     m_renderer.init();
     //renderer.shaders("resources/shader/shader.vs", "resources/shader/shader.fs");
     // Make a quad with two triangles
@@ -33,13 +36,18 @@ void Game::start(){
 }
 
 void Game::run(){
-    while (!glfwWindowShouldClose(m_window->getWindow()))
+
+    // Start game
+    m_running = true;
+    while (m_running)
     {
         // input
         // -----
         glfwPollEvents();
-        m_window->processInput();
-
+        m_running = m_window->processInput();
+        //if(m_window->getIsKeyDown(GLFW_KEY_SPACE))
+        //    std::cout << "Detected Key\n";
+        
         // render
         // ------
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -62,4 +70,16 @@ void Game::run(){
 
 void Game::shutDown(){
     m_window->shutdown();
+}
+
+void Game::keyUpdate(){
+    std::cout << "entrei\n";
+}
+
+void Game::keyCallBack(GLFWwindow* window, int  key, int scancode, int action, int mods){
+    std::cout << "GLFW Key Callback!\n";
+    Game* game = static_cast<Game*>(glfwGetWindowUserPointer(window));
+    if(game){
+        game->keyUpdate();
+    }
 }

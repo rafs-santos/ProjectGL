@@ -1,5 +1,12 @@
+#ifndef GAME_H
+#define GAME_H
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 #include "window/win_app.h"
 #include "renderer/renderer.h"
+
 class Game
 {
 
@@ -7,6 +14,8 @@ public:
     Game(/* args */);
     ~Game();
 
+    static void keyCallBack(GLFWwindow* window, int  key, int scancode, int action, int mods);
+    void keyUpdate();
     void start();
     void run();
     void shutDown();
@@ -17,5 +26,5 @@ private:
     Renderer m_renderer;
 };
 
-
+#endif
 
