@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.23)
 
 # Project name and a few useful settings. Other commands can pick up the results
-project(ProjectGL VERSION 0.0.1)
+project(Sandbox VERSION 0.0.1)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_SUPPRESS_REGENERATION true)
@@ -17,42 +17,6 @@ if(CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 endif(CMAKE_COMPILER_IS_GNUCXX)
 
-
-set( SOURCE_PATH "${PROJECT_SOURCE_DIR}/src" )
-set( INCLUDE_PATH "${PROJECT_SOURCE_DIR}/src" )
-
-find_package(OpenGL REQUIRED)
-
-#add_subdirectory(../lib/Glad/ build)
-add_subdirectory(lib/glfw/ EXCLUDE_FROM_ALL)
-add_subdirectory(lib/Glad/)
-add_subdirectory(lib/stb_image/)
-add_subdirectory(lib/glm/)
-
-add_executable(ProjectGL)
-
-target_sources(
-    ProjectGL
-    PRIVATE
-       "${SOURCE_PATH}/main.cpp"
-       "${SOURCE_PATH}/window/win_app.cpp"
-       "${SOURCE_PATH}/renderer/renderer.cpp"
-       "${SOURCE_PATH}/game/game.cpp"
-    PUBLIC
-        "${INCLUDE_PATH}/window/win_app.h"
-        "${INCLUDE_PATH}/renderer/renderer.h"
-        "${INCLUDE_PATH}/game/game.h"
-)
-
-# Assuming this is meant to be a public directory
-target_include_directories(ProjectGL PUBLIC ${INCLUDE_PATH} )
-
-target_link_libraries(
-                    ProjectGL
-                    PRIVATE
-                        glfw
-                        glad
-                        stb_image
-                        glm
-)
+add_subdirectory(SolarB)
+add_subdirectory(Sandbox)
 
