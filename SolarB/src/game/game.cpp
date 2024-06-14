@@ -1,15 +1,15 @@
 #include "Game.h"
 #include <iostream>
 
-
-
-SolarB::Game::Game(/* args */)
+//Composição, agregação e injeção de dependência
+ 
+SolarB::Game::Game(const std::string name) : m_name(name)
 {
 }
 
-SolarB::Game::~Game()
-{
-}
+// SolarB::Game::~Game()
+// {
+// }
 
 void SolarB::Game::start(){
     // Maybe create my callback before call this
@@ -67,7 +67,7 @@ void SolarB::Game::run(){
         // render the triangle
         m_renderer.use();
 
-        //m_renderer.drawQuad();
+        m_renderer.drawQuad();
 
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)

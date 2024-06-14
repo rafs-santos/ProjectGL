@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <memory>
 
 #include "game/game.h"
 #include "sandbox_layer.h"
@@ -8,15 +8,31 @@
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
 
-int main()
-{   
-    std::cout << "sandbox_layer\n";
-    SolarB::Game game;
-    game.addLayer(new Sandbox::SandboxLayer{});
+class SandboxGame : public SolarB::Game
+{
+public:
+    SandboxGame(const std::string& name) : Game(name) {
+        addLayer(new Sandbox::SandboxLayer{});
+    }
+    ~SandboxGame();
 
-    game.start();
-    game.run();
-    game.shutDown();
+private:
+    /* data */
 
-    return 0;
+};
+
+std::unique_ptr<SolarB::Game> SolarB::createGame(){
+    return std::make_unique<SandboxGame>("SandBox");
 }
+// int main()
+// {   
+//     std::cout << "sandbox_layer\n";
+//     SolarB::Game game;
+//     game.addLayer(new Sandbox::SandboxLayer{});
+
+//     game.start();
+//     game.run();
+//     game.shutDown();
+
+//     return 0;
+// }

@@ -9,13 +9,14 @@
 #include "layer/layer.h"
 
 #include <vector>
+#include <memory>
 
 namespace SolarB{
     class Game
     {
     public:
-        Game(/* args */);
-        ~Game();
+        Game(const std::string name);
+        // ~Game();
 
         static void keyCallBack(GLFWwindow* window, int  key, int scancode, int action, int mods);
         void keyUpdate();
@@ -25,6 +26,7 @@ namespace SolarB{
 
         void addLayer(Layer* layer);
     private:
+        std::string m_name{};
         bool m_running = false;
         // Try to understand when use pointer and when not use 
         WinApp* m_window{nullptr};
@@ -32,6 +34,8 @@ namespace SolarB{
 
         std::vector<Layer*> m_layers;
     };
+
+    std::unique_ptr<Game> createGame();
 }
 #endif
 

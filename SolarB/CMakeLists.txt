@@ -35,7 +35,7 @@ add_library(SolarB STATIC)
 target_sources(
     SolarB
     PRIVATE
-       "${SOURCE_PATH}/main.cpp"
+       "${SOURCE_PATH}/entry.cpp"
        "${SOURCE_PATH}/window/win_app.cpp"
        "${SOURCE_PATH}/renderer/renderer.cpp"
        "${SOURCE_PATH}/game/game.cpp"
