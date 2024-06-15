@@ -11,21 +11,22 @@ namespace SolarB{
     public:
         unsigned int m_ID;
         std::vector<unsigned int> m_textureID;
-        void init();
+        static void init();
+        static void drawQuad();
         // copy shader from learnopengl code
-        void shaders(const char* , const char* , const char* );
+        static void shaders(const char* , const char* , const char* );
 
         void use();
         void quadData();
         void loadTexture(const char* texturePath);
-        void drawQuad() const;
+       
         void bindTexture();
 
         const std::vector<unsigned int>& getTextureIDs() const {
             return m_textureID;
         }
     private:
-        void checkCompileErrors(unsigned int shader, std::string type);
+        static void checkCompileErrors(unsigned int shader, std::string type);
         
         std::unordered_map<std::string, unsigned int> m_shaders;  // Map shader names to their IDs
 

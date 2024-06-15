@@ -16,9 +16,9 @@ void SolarB::Game::start(){
     
     m_window = new WinApp(1600, 900, "Rafael");
 
-    if(!m_window->init()){
-        std::cout << "Failed to initialize glfw" << std::endl;
-    }
+    // if(!m_window->init()){
+    //     std::cout << "Failed to initialize glfw" << std::endl;
+    // }
     if (!m_window->initGlad())
     {
         std::cout << "GLAD init failed!";
